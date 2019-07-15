@@ -1,0 +1,15 @@
+1、安装NPM和node.js，
+2、npm init
+3、安装webpack和webpack-dev-server
+4、配置webpack-config.js 初始化内容
+5、配置package.json    增加一个快速启动webpack-dev-server服务的脚本
+6、新建一个main.js   （webpack会从main.js开始工作）
+7、配置webpack-config.js  入口和出口
+8、新建一个index.html作为SPA的入口 
+9、安装各种文件的加载器
+9、配置webpack-config.js  加载器
+10、新建.babelrc文件，写入babel的配置
+11、新建app.vue
+12、生产环境webpack-prod-config.js
+13、index.ejs动态设置了静态资源的路径和文件名
+14、

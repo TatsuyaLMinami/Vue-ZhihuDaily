@@ -1,0 +1,93 @@
+                       webpack.config.js
+var path = require("path");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var VueLoaderPlugin = require('vue-loader/lib/plugin');
+var config = {
+	//单入口
+	entry:{
+		main:"./main"
+	},
+	//存放打包后文件的输出目录
+	output:{
+		path: path.join(__dirname,"./dist"),
+		//指定资源文件引用的目录
+		publicPath: "/dist/",
+		//指定输出文件的名称
+		filename: "main.js"
+	},
+	module:{
+		rules:[
+			{
+				test: /\.vue$/,
+				loader: "vue-loader",
+				options:{
+					loaders:{
+						css: ExtractTextPlugin.extract({
+							use: "css-loader",
+							fallback: "vue-style-loader"
+						})
+					}
+				}
+			},
+			{
+				test: /\.js$/,
+				loader: "babel-loader",
+				exclude: /node_modules/
+			},
+			{
+				test: /\.css$/,
+				use: ExtractTextPlugin.extract({
+					use: "css-loader",
+					fallback: "style-loader"
+				})
+			}
+		]
+	},
+	plugins:[
+		//重命名提取后的css文件
+		new ExtractTextPlugin("main.css"),
+		new VueLoaderPlugin()
+	]
+};
+module.exports = config;
+										package.json
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --open --config webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/runtime": "^7.4.5",
+    "babel-loader": "^8.0.0",
+    "css-loader": "^3.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "style-loader": "^0.23.1",
+    "vue-hot-reload-api": "^2.3.3",
+    "vue-loader": "^15.7.0",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.35.2",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "dependencies": {
+    "vue": "^2.6.10",
+    "webpack-cli": "^3.3.5"
+  },
+  "keywords": []
+}
+									.babelrc
+									{
+	"presets":["@babel/preset-env",],
+	"plugins": ["@babel/plugin-transform-runtime"],
+	
+}
